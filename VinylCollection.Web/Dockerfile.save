@@ -1,0 +1,2 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+https://github.com/NESTicle/vinyl_catalog-backend.git
