@@ -7,6 +7,10 @@ namespace VinylCollection.Service.Interfaces
 {
     public interface IParameterService
     {
+        /// <summary>
+        /// Get a List of Countries
+        /// </summary>
+        /// <returns></returns>
         List<Country> GetCountries();
     }
 }
