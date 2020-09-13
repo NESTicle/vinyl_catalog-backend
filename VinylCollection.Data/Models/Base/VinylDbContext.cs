@@ -24,6 +24,8 @@ namespace VinylCollection.Data.Models.Base
         #region Parameters
 
         public DbSet<Country> Country { get; set; }
+        public DbSet<Genre> Genre { get; set; }
+        public DbSet<SubGenre> SubGenre { get; set; }
 
         #endregion
 
@@ -43,6 +45,8 @@ namespace VinylCollection.Data.Models.Base
             modelBuilder.ApplyConfiguration(new VinylMap());
             modelBuilder.ApplyConfiguration(new CommunityMap());
             modelBuilder.ApplyConfiguration(new CountryMap());
+            modelBuilder.ApplyConfiguration(new GenreMap());
+            modelBuilder.ApplyConfiguration(new SubGenreMap());
 
             base.OnModelCreating(modelBuilder);
         }

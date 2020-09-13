@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using VinylCollection.Data.Models.Vinyls;
 
 namespace VinylCollection.Data.Models.Mappings.Models
@@ -16,6 +17,9 @@ namespace VinylCollection.Data.Models.Mappings.Models
 
             builder.HasIndex(x => x.Id).IsUnique();
 
+            builder.Property(x => x.Price)
+                .HasColumnType("Money");
+
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Vinyls)
                 .HasForeignKey(x => x.Id_User);
@@ -23,6 +27,10 @@ namespace VinylCollection.Data.Models.Mappings.Models
             builder.HasOne(x => x.Country)
                 .WithMany(x => x.Vinyls)
                 .HasForeignKey(x => x.Id_Country);
+
+            builder.HasOne(x => x.SubGenre)
+                .WithMany(x => x.Vinyls)
+                .HasForeignKey(x => x.Id_SubGenre);
         }
     }
 }

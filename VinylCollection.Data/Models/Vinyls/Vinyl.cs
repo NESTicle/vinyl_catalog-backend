@@ -9,10 +9,11 @@ namespace VinylCollection.Data.Models.Vinyls
     {
         public int Id_User { get; set; }
         public int Id_Country { get; set; }
+        public int Id_SubGenre { get; set; }
 
         public string Band { get; set; }
         public string Album { get; set; }
-        public string Genre { get; set; }
+        
         public string CoverURL { get; set; }
         public DateTime DateReleased { get; set; }
         public string Info { get; set; }
@@ -22,11 +23,11 @@ namespace VinylCollection.Data.Models.Vinyls
         public decimal Price { get; set; }
         public string Link { get; set; }
         public string Type { get; set; }
-        public DateTime? DatePublished { get; set; }
         public string Notes { get; set; }
         public string Currency { get; set; }
 
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }
+        public virtual SubGenre SubGenre { get; set; }
     }
 }

@@ -29,6 +29,8 @@ namespace VinylCollection.Web
             services.AddScoped<IVinylService, VinylService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICommunityService, CommunityService>();
+            services.AddScoped<IParameterService, ParameterService>();
+            
 
             // SQL Server Configuration
             services.AddDbContext<VinylDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Db")));

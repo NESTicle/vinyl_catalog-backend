@@ -60,13 +60,12 @@ namespace VinylCollection.Service.Implementations
 
                     entity.Band = model.Band;
                     entity.Album = model.Album;
-                    entity.Genre = model.Genre;
+                    entity.Id_SubGenre = model.Id_SubGenre;
                     entity.CoverURL = model.CoverURL;
                     entity.DateReleased = model.DateReleased;
                     entity.Country = model.Country;
                     entity.Info = model.Info;
                     entity.Color = model.Color;
-                    entity.DatePublished = model.DatePublished;
                     entity.Disc = model.Disc;
                     entity.Link = model.Link;
                     entity.Notes = model.Notes;
