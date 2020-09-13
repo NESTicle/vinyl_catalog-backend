@@ -11,6 +11,8 @@ namespace VinylCollection.Service.Interfaces
 
         User LoginUser(User user);
 
+        User GetUserByUserName(string userName);
+
         string GenerateJwt(User user);
     }
 }

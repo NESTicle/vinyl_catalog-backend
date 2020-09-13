@@ -8,6 +8,7 @@ using VinylCollection.Data.Helpers;
 using VinylCollection.Data.Models.Base;
 using VinylCollection.Data.Models.Security;
 using VinylCollection.Domain.Helper;
+using VinylCollection.Domain.Transversal;
 using VinylCollection.Service.Interfaces;
 
 namespace VinylCollection.Service.Implementations
@@ -15,7 +16,7 @@ namespace VinylCollection.Service.Implementations
     public class UserService : IUserService
     {
         private readonly VinylDbContext _context;
-
+        
         public UserService(VinylDbContext context)
         {
             _context = context;
@@ -51,6 +52,18 @@ namespace VinylCollection.Service.Implementations
                     return null;
 
                 return PasswordHasher.ValidatePassword(model.Password, user.Password) ? user : null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public User GetUserByUserName(string userName)
+        {
+            try
+            {
+                return _context.User.FirstOrDefault(x => x.UserName.ToLower().Equals(userName.ToLower()));
             }
             catch (Exception e)
             {

@@ -1,12 +1,19 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Threading.Tasks;
 using VinylCollection.Data.Models.Base;
 using VinylCollection.Data.Models.Mappings.AutoMapper;
+using VinylCollection.Data.Models.Security;
+using VinylCollection.Domain.Transversal;
 using VinylCollection.Service.Implementations;
 using VinylCollection.Service.Interfaces;
 
@@ -20,6 +27,8 @@ namespace VinylCollection.Web
         }
 
         public IConfiguration Configuration { get; }
+        
+        public User User { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -30,7 +39,57 @@ namespace VinylCollection.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<IParameterService, ParameterService>();
-            
+
+            services.AddScoped<IAppPrincipal, AppPrincipal>();
+
+            // JWT Configuration
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
+
+                        var userName = context.Principal.Identity.Name;
+                        var user = userService.GetUserByUserName(userName);
+
+                        if (user == null)
+                            context.Fail("Unauthorized");
+
+                        User.UserName = user.UserName;
+                        User.Id = user.Id;
+
+                        return Task.CompletedTask;
+                    }
+                };
+
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetValue<string>("Keys:JWT"))),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+
+                services.AddScoped<IAppPrincipal>(provider =>
+                {
+                    if (User != null)
+                    {
+                        var user = provider.GetService<IHttpContextAccessor>()?.HttpContext.User;
+                        return new AppPrincipal(User.Id, User.UserName);
+                    }
+
+                    return new AppPrincipal(0, "Unknown");
+                });
+            });
 
             // SQL Server Configuration
             services.AddDbContext<VinylDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Db")));
@@ -52,6 +111,7 @@ namespace VinylCollection.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -4,6 +4,7 @@ using System.Linq;
 using VinylCollection.Data.Models.Base;
 using VinylCollection.Data.Models.Vinyls;
 using VinylCollection.Domain.Helper;
+using VinylCollection.Domain.Transversal;
 using VinylCollection.Service.Interfaces;
 
 namespace VinylCollection.Service.Implementations
@@ -11,10 +12,12 @@ namespace VinylCollection.Service.Implementations
     public class VinylService : IVinylService
     {
         private readonly VinylDbContext _context;
+        private IAppPrincipal _appPrincipal { get; }
 
-        public VinylService(VinylDbContext context)
+        public VinylService(VinylDbContext context, IAppPrincipal appPrincipal)
         {
             _context = context;
+            _appPrincipal = appPrincipal;
         }
 
         public List<Vinyl> GetVinyls(QueryParamsHelper queryParameters, string search)
@@ -51,7 +54,7 @@ namespace VinylCollection.Service.Implementations
             {
                 if(model.Id <= 0)
                 {
-                    model.Id_User = 3;
+                    model.Id_User = _appPrincipal.Id;
                     _context.Vinyl.Add(model);
                 }
                 else
