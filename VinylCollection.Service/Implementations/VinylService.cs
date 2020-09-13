@@ -29,7 +29,7 @@ namespace VinylCollection.Service.Implementations
                 if (!string.IsNullOrEmpty(search))
                     query = query.Where(x => x.Band.ToLower().Contains(search.ToLower()));
 
-                var vinylList = query
+                var vinylList = query.Where(x => x.Id_User == _appPrincipal.Id)
                                   .OrderByDescending(x => x.DateCreated)
                                   .Skip(queryParameters.PageCount * (queryParameters.Page - 1))
                                   .Take(queryParameters.PageCount)

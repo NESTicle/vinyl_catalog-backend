@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace VinylCollection.Domain.Helper
 {
@@ -8,7 +6,7 @@ namespace VinylCollection.Domain.Helper
     {
         public static byte[] GetHashKeyJwt()
         {
-            return Encoding.ASCII.GetBytes("1JjMjU2YThhZjRjYmFkMTM5ZjA2MGEI5OGVTIxMTk5MjzNTAzjQ1YjE2NmY2NMGY4YWNhZwlMzZiOGJhZ==");
+            return Encoding.ASCII.GetBytes("GnwOTaibVuMtMtStqrnx9AmhhZOwpQIKw7PxsspqkAluqWAcH0dweU03ojJf01fsLcyiaiATYXIHdCNr");
         }
     }
 }

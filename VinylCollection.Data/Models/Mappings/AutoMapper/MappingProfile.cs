@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VinylCollection.Data.Models.Communities;
 using VinylCollection.Data.Models.Security;
+using VinylCollection.Data.Models.Vinyls;
 using VinylCollection.Domain.ViewModels.Communities;
 using VinylCollection.Domain.ViewModels.Security;
+using VinylCollection.Domain.ViewModels.Vinyls;
 
 namespace VinylCollection.Data.Models.Mappings.AutoMapper
 {
@@ -15,6 +14,7 @@ namespace VinylCollection.Data.Models.Mappings.AutoMapper
         {
             CreateMap<Community, CommunityViewModel>();
             CreateMap<User, UserViewModel>();
+            CreateMap<Vinyl, VinylViewModel>();
         }
     }
 }

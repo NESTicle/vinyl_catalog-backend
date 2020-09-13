@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VinylCollection.Data.Models.Vinyls;
 using VinylCollection.Domain.Helper;
+using VinylCollection.Domain.ViewModels.Vinyls;
 using VinylCollection.Service.Interfaces;
 using VinylCollection.Web.Helper;
 
@@ -14,13 +16,16 @@ namespace VinylCollection.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VinylController : ControllerBase
     {
         private readonly IVinylService _vinylService;
+        private readonly IMapper _mapper;
 
-        public VinylController(IVinylService vinylService)
+        public VinylController(IVinylService vinylService, IMapper mapper)
         {
             _vinylService = vinylService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,7 +39,10 @@ namespace VinylCollection.Web.Controllers
 
             try
             {
-                result.Data = _vinylService.GetVinyls(new QueryParamsHelper(), search);
+                var data = _vinylService.GetVinyls(new QueryParamsHelper(), search);
+                var mapped = _mapper.Map<List<VinylViewModel>>(data);
+
+                result.Data = mapped;
             }
             catch (Exception e)
             {
@@ -59,6 +67,7 @@ namespace VinylCollection.Web.Controllers
                 if (model == null)
                     throw new Exception("There is an error ocurred trying to save a vinyl");
 
+                model.Id_VinylFormat = 1;
                 result.Data = _vinylService.SaveVinyl(model);
             }
             catch (Exception e)

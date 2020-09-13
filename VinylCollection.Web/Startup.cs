@@ -27,8 +27,8 @@ namespace VinylCollection.Web
         }
 
         public IConfiguration Configuration { get; }
-        
-        public User User { get; set; }
+
+        public User User { get; set; } = new User();
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -40,7 +40,7 @@ namespace VinylCollection.Web
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<IParameterService, ParameterService>();
 
-            services.AddScoped<IAppPrincipal, AppPrincipal>();
+            //services.AddScoped<IAppPrincipal, AppPrincipal>();
 
             // JWT Configuration
             services.AddAuthentication(x =>
@@ -78,17 +78,17 @@ namespace VinylCollection.Web
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            });
 
-                services.AddScoped<IAppPrincipal>(provider =>
+            services.AddScoped<IAppPrincipal>(provider =>
+            {
+                if (User != null)
                 {
-                    if (User != null)
-                    {
-                        var user = provider.GetService<IHttpContextAccessor>()?.HttpContext.User;
-                        return new AppPrincipal(User.Id, User.UserName);
-                    }
+                    var user = provider.GetService<IHttpContextAccessor>()?.HttpContext.User;
+                    return new AppPrincipal(User.Id, User.UserName);
+                }
 
-                    return new AppPrincipal(0, "Unknown");
-                });
+                return new AppPrincipal(0, "Unknown");
             });
 
             // SQL Server Configuration
@@ -109,6 +109,7 @@ namespace VinylCollection.Web
                  .AllowAnyMethod()
                  .AllowAnyHeader());
 
+            //app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthentication();

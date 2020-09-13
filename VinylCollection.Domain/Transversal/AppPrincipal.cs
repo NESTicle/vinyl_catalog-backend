@@ -2,7 +2,7 @@
 {
     public class AppPrincipal : IAppPrincipal
     {
-        public AppPrincipal(int id = 0, string userName = "Unknown")
+        public AppPrincipal(int id, string userName)
         {
             Id = id;
             UserName = userName;
