@@ -12,5 +12,14 @@ namespace VinylCollection.Service.Interfaces
         /// </summary>
         /// <returns></returns>
         List<Country> GetCountries();
+
+        List<Genre> GetGenres();
+
+        /// <summary>
+        /// Get All Subgenres
+        /// </summary>
+        /// <param name="id">Genre Id</param>
+        /// <returns></returns>
+        List<SubGenre> GetSubGenresByGenreId(int id);
     }
 }

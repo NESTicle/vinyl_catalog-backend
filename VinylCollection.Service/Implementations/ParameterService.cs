@@ -28,5 +28,29 @@ namespace VinylCollection.Service.Implementations
                 throw e;
             }
         }
+
+        public List<Genre> GetGenres()
+        {
+            try
+            {
+                return _context.Genre.ToList();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<SubGenre> GetSubGenresByGenreId(int id)
+        {
+            try
+            {
+                return _context.SubGenre.Where(x => x.Id_Genre == id).ToList();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
