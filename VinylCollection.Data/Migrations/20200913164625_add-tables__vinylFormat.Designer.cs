@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VinylCollection.Data.Models.Base;
 
 namespace VinylCollection.Data.Migrations
 {
     [DbContext(typeof(VinylDbContext))]
-    partial class VinylDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200913164625_add-tables__vinylFormat")]
+    partial class addtables__vinylFormat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

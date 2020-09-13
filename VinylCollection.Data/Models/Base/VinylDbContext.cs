@@ -18,6 +18,7 @@ namespace VinylCollection.Data.Models.Base
         #region Vinyl
 
         public DbSet<Vinyl> Vinyl { get; set; }
+        public DbSet<VinylFormat> VinylFormat { get; set; }
 
         #endregion
 
@@ -47,7 +48,8 @@ namespace VinylCollection.Data.Models.Base
             modelBuilder.ApplyConfiguration(new CountryMap());
             modelBuilder.ApplyConfiguration(new GenreMap());
             modelBuilder.ApplyConfiguration(new SubGenreMap());
-
+            modelBuilder.ApplyConfiguration(new VinylFormatMap());
+            
             base.OnModelCreating(modelBuilder);
         }
     }

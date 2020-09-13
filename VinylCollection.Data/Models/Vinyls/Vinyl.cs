@@ -10,6 +10,7 @@ namespace VinylCollection.Data.Models.Vinyls
         public int Id_User { get; set; }
         public int Id_Country { get; set; }
         public int Id_SubGenre { get; set; }
+        public int Id_VinylFormat { get; set; }
 
         public string Band { get; set; }
         public string Album { get; set; }
@@ -29,5 +30,6 @@ namespace VinylCollection.Data.Models.Vinyls
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }
         public virtual SubGenre SubGenre { get; set; }
+        public virtual VinylFormat VinylFormat { get; set; }
     }
 }

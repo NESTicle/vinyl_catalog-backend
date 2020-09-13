@@ -31,6 +31,32 @@ namespace VinylCollection.Data.Models.Mappings.Models
             builder.HasOne(x => x.SubGenre)
                 .WithMany(x => x.Vinyls)
                 .HasForeignKey(x => x.Id_SubGenre);
+
+            builder.HasOne(x => x.VinylFormat)
+                .WithMany(x => x.Vinyls)
+                .HasForeignKey(x => x.Id_VinylFormat);
+        }
+    }
+
+    public class VinylFormatMap : IEntityTypeConfiguration<VinylFormat>
+    {
+        void IEntityTypeConfiguration<VinylFormat>.Configure(EntityTypeBuilder<VinylFormat> builder)
+        {
+            builder.ToTable("VinylFormats", "Vinyl");
+
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id)
+                .IsRequired();
+
+            builder.HasIndex(x => x.Id).IsUnique();
+
+            builder.Property(x => x.Name)
+                .HasMaxLength(80)
+                .IsRequired();
+
+            builder.Property(x => x.Description)
+                .HasMaxLength(300)
+                .IsRequired();
         }
     }
 }
