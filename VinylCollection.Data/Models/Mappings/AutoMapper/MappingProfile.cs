@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using VinylCollection.Data.Models.Communities;
+using VinylCollection.Data.Models.Parameters;
 using VinylCollection.Data.Models.Security;
 using VinylCollection.Data.Models.Vinyls;
 using VinylCollection.Domain.ViewModels.Communities;
+using VinylCollection.Domain.ViewModels.Parameters;
 using VinylCollection.Domain.ViewModels.Security;
 using VinylCollection.Domain.ViewModels.Vinyls;
 
@@ -15,6 +17,9 @@ namespace VinylCollection.Data.Models.Mappings.AutoMapper
             CreateMap<Community, CommunityViewModel>();
             CreateMap<User, UserViewModel>();
             CreateMap<Vinyl, VinylViewModel>();
+            CreateMap<Genre, GenreViewModel>();
+            CreateMap<SubGenre, SubGenreViewModel>();
+            CreateMap<Country, CountryViewModel>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VinylCollection.Data.Models.Base;
@@ -24,7 +25,10 @@ namespace VinylCollection.Service.Implementations
         {
             try
             {
-                var query = _context.Vinyl.AsQueryable();
+                var query = _context.Vinyl
+                    .Include(x => x.SubGenre.Genre)
+                    .Include(x => x.Country)
+                    .AsQueryable();
 
                 if (!string.IsNullOrEmpty(search))
                     query = query.Where(x => x.Band.ToLower().Contains(search.ToLower()));

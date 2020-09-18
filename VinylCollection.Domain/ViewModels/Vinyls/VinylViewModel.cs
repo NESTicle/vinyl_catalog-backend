@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using VinylCollection.Domain.ViewModels.Base;
+using VinylCollection.Domain.ViewModels.Parameters;
 
 namespace VinylCollection.Domain.ViewModels.Vinyls
 {
@@ -21,5 +22,8 @@ namespace VinylCollection.Domain.ViewModels.Vinyls
         public string Type { get; set; }
         public string Notes { get; set; }
         public string Currency { get; set; }
+
+        public CountryViewModel Country { get; set; }
+        public SubGenreViewModel SubGenre { get; set; }
     }
 }
