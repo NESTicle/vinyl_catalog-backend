@@ -21,6 +21,7 @@ namespace VinylCollection.Web
 {
     public class Startup
     {
+        public readonly string CORS = "VinylCatalog.CORS";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -91,6 +92,14 @@ namespace VinylCollection.Web
                 return new AppPrincipal(0, "Unknown");
             });
 
+            // CORS
+            services.AddCors(c => c.AddPolicy(CORS, builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             // SQL Server Configuration
             services.AddDbContext<VinylDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Db")));
             services.AddAutoMapper(typeof(MappingProfile));
@@ -104,10 +113,7 @@ namespace VinylCollection.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder
-                 .AllowAnyOrigin()
-                 .AllowAnyMethod()
-                 .AllowAnyHeader());
+            app.UseCors(CORS);
 
             //app.UseHttpsRedirection();
             app.UseRouting();
