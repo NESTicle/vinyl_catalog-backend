@@ -52,5 +52,11 @@ namespace VinylCollection.Data.Models.Base
             
             base.OnModelCreating(modelBuilder);
         }
+
+        public override int SaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            return base.SaveChanges();
+        }
     }
 }

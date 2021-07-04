@@ -101,7 +101,8 @@ namespace VinylCollection.Web
             }));
 
             // SQL Server Configuration
-            services.AddDbContext<VinylDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Db")));
+            //services.AddDbContext<VinylDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Db")));
+            services.AddDbContext<VinylDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Db")));
             services.AddAutoMapper(typeof(MappingProfile));
         }
 
