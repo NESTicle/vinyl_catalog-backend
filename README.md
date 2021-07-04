@@ -1,6 +1,6 @@
 # Vinyl Catalog App (Backend)
 
-Proyecto mantenido por una única persona (en el momento), donde 
+Proyecto mantenido por una única persona (en el momento), donde aplicaré mis conocimientos.
 
 ![Vinyl Catalog](https://user-images.githubusercontent.com/1715022/89719450-feff9400-d98d-11ea-850b-d121d914dc73.png)
 
