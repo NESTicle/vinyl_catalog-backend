@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VinylCollection.Data.Models.Base;
@@ -9,9 +10,10 @@ using VinylCollection.Data.Models.Base;
 namespace VinylCollection.Data.Migrations
 {
     [DbContext(typeof(VinylDbContext))]
-    partial class VinylDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210715001018_update_table--country__code")]
+    partial class update_tablecountry__code
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

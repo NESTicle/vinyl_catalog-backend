@@ -24,8 +24,4 @@
     <ProjectReference Include="..\VinylCollection.Domain\VinylCollection.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>
