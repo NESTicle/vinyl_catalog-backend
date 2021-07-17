@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using VinylCollection.Web.Helper;
 
 namespace VinylCollection.Web
 {
@@ -13,6 +14,7 @@ namespace VinylCollection.Web
     {
         public static void Main(string[] args)
         {
+            IOHelper.CreateDirectory("wwwroot/uploads/avatars");
             CreateHostBuilder(args).Build().Run();
         }
 
