@@ -2,7 +2,7 @@
 {
     public interface IAppPrincipal
     {
-        int Id { get; }
-        string UserName { get; }
+        int Id { get; set; }
+        string UserName { get; set; }
     }
 }

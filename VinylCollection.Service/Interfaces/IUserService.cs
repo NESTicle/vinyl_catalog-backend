@@ -11,6 +11,11 @@ namespace VinylCollection.Service.Interfaces
 
         User LoginUser(User user);
 
+        /// <summary>
+        /// Get an username filtered by userName
+        /// </summary>
+        /// <param name="userName">UserName</param>
+        /// <returns></returns>
         User GetUserByUserName(string userName);
 
         string GenerateJwt(User user);

@@ -8,7 +8,7 @@
             UserName = userName;
         }
 
-        public int Id { get; }
-        public string UserName { get; }
+        public int Id { get; set; }
+        public string UserName { get; set; }
     }
 }

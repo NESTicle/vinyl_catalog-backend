@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using VinylCollection.Data.Models.Base;
@@ -119,12 +121,21 @@ namespace VinylCollection.Web
             //app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
+                RequestPath = "/avatars"
             });
         }
     }
